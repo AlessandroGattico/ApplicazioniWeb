@@ -1,0 +1,41 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+h1 {
+    justify-content: center;
+    align-content: center;
+}
+
+.btn.btn-primary.select {
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.btn.btn-primary.indietro {
+    background-color: darkred;
+}
+
+.table {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+}

@@ -1,0 +1,32 @@
+﻿@page
+@model GestoreDBMS.Pages.AddSqLiteModel
+@{
+    ViewData["Title"] = "Aggiungi SqLite";
+}
+
+<h1>Connettiti ad un Database SQLite</h1>
+
+<div class="row">
+    <h3>Inserisci i parametri per aprire la connessione con un database SQLite</h3>
+    <div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="padding-bottom: 10px">
+                <label asp-for="sqLite.path" class="control-label">Percorso del database</label>
+                <input asp-for="sqLite.path" class="form-control" />
+                <span asp-validation-for="sqLite.path" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-top: 10px">
+                <input type="submit" value="Avvia" class="btn btn-primary" />
+                <a asp-page="../Index" class="btn btn-primary indietro">Indietro</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

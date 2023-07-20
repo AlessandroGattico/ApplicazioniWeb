@@ -1,0 +1,15 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Errore Generico";
+}
+
+<h1 class="text-danger">Errore</h1>
+<h2 class="text-danger">Errore generico</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}

@@ -1,0 +1,31 @@
+﻿@page
+@model GestoreDBMS.Pages.SqLiteExportCsvModel
+
+@{
+    ViewData["Title"] = "Esporta in CSV";
+}
+
+<h1>Esporta in csv</h1>
+
+<div>
+    <h3>Inserisci il path del file sul quale vuoi esportare</h3>
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" style="padding-bottom:10px">
+            <label asp-for="filePath" class="control-label"></label>
+            <input asp-for="filePath" class="form-control" />
+            <span asp-validation-for="filePath" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Esporta" class="btn btn-primary" />
+            <a asp-page="SqLiteTables" class="btn btn-primary indietro">Indietro</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

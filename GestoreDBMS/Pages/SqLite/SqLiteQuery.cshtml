@@ -1,0 +1,56 @@
+﻿@page
+@model GestoreDBMS.Pages.SqLiteQueryModel
+@{
+    ViewData["Title"] = "Esecuzione Query";
+}
+
+<h1>Inserire la query da eseguire sul database</h1>
+
+<div>
+    <div style="padding-bottom: 50px">
+        <form method="post" style="padding-bottom: 10px">
+            <div class="form-group" style="padding-bottom: 10px">
+                <label asp-for="Query" class="control-label"></label>
+                <input asp-for="Query" class="form-control" />
+                <span asp-validation-for="Query" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-bottom: 10px">
+                <input type="submit" value="Esegui" class="btn btn-primary" />
+                <a asp-page="ExecuteQuery" target="_blank" rel="noopener noreferrer" class="btn btn-primary indietro">Apri un'altra scheda</a>
+            </div>
+        </form>
+    </div>
+    <div>
+        <table border="1" cellpadding="3" id="printTable">
+            @for (int i = 0; i < @Model.values.getRowsSize(); i++)
+            {
+                Model.values.setCurrentRow(i);
+                <tr>
+                    @for (int k = 0; k < @Model.values.getColumns(); k++)
+                    {
+                        @if (i == 0)
+                        {
+                            <th style="border: 1px solid blue;">@Model.values.selectValue(k)</th>
+                        }
+                        else
+                        {
+                            <th style="border: 1px solid black;">@Model.values.selectValue(k)</th>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+        <div style="padding-top:12px">
+            @if (@Model.values.status != null)
+            {
+                <b style="color:black">@Model.values.status</b>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

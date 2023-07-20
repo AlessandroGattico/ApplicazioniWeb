@@ -1,0 +1,15 @@
+﻿@page
+@model GestoreDBMS.Pages.Error.ConnectionErrorModel
+@{
+    ViewData["Title"] = "Errore Connessione";
+}
+
+<h1 class="text-danger">Errore</h1>
+<h2 class="text-danger">Impossibile aprire la connessione verso il Database</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}

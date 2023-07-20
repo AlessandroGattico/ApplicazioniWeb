@@ -1,0 +1,15 @@
+﻿@page
+@model GestoreDBMS.Pages.Error.FileErrorModel
+@{
+    ViewData["Title"] = "Errore File";
+}
+
+<h1 class="text-danger">Errore</h1>
+<h2 class="text-danger">Errore di lettura o scrittura del file</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}

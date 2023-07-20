@@ -1,0 +1,115 @@
+﻿@page
+@model GestoreDBMS.Pages.PostgreSqlTablesModel
+
+@{
+    ViewData["Title"] = "Database Info";
+}
+
+<h1>Database Informations</h1>
+
+<div style="padding-bottom: 10px">
+    <div style="display:flex">
+        <div style="padding-right:10px; justify-content:space-between;">
+            <a href="https://localhost:7252" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Apri una nuova connessione</a>
+            <a asp-page="ImportaCsvLite" class="btn btn-primary">Importa da csv</a>
+            <a asp-page="EsportaCsvLite" class="btn btn-primary">Esporta in csv</a>
+            <a asp-page="Query" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Esegui query</a>
+            <form method="post" style="padding-top:10px">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="submit" asp-page-handler="Close" value="Chiudi connessione" class="btn btn-primary indietro" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    @foreach (@Models.Table table in Model.tables.tables)
+    {
+        @if (table.name != "sqlite_sequence")
+        {
+            <div class="table">
+                <c style="background-color: lavender">@table.name</c>
+                <div>
+
+                    <table border="1">
+                        <tr>
+                            <th style="border: 2px solid darkgrey">Column</th>
+                            <th style="border: 2px solid darkgrey">DataType</th>
+                            <th style="border: 2px solid darkgrey">IsNull</th>
+                        </tr>
+                        @foreach (@Models.Table.Column column in table.columns)
+                        {
+                            <tr>
+                                <th style="border: 2px solid darkgrey">@column.name</th>
+                                <th style="border: 2px solid darkgrey">@column.dataType</th>
+                                <th style="border: 2px solid darkgrey">@column.isNull</th>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div>
+                    @if (table.primaryKeysNames.Count > 0)
+                    {
+
+                        <h6>Primary key:</h6>
+                        <ul>
+                            @foreach (string str in table.primaryKeysNames)
+                            {
+                                <li>@str</li>
+                            }
+                        </ul>
+
+                    }
+                </div>
+                <div>
+                    @if (table.indexes.Count > 0)
+                    {
+
+                        <c style="background-color: lavender">Indexes: </c>
+                        <table border="1">
+                            <tr>
+                                <th style="border: 2px solid darkgrey">Name</th>
+                                <th style="border: 2px solid darkgrey">Column</th>
+                            </tr>
+
+                            @foreach (@Models.Table.Index index in table.indexes)
+                            {
+                                @foreach (string s in index.columns)
+                                {
+                                    <tr>
+                                        <th style="background-color: darkslateblue">@index.name</th>
+                                        <th style="background-color: darkslateblue">@s</th>
+                                    </tr>
+                                }
+                            }
+                        </table>
+
+                    }
+                </div>
+                <div>
+                    @if (table.foreignKeys.Count > 0)
+                    {
+                        <c style="background-color: lavender">Foreign Keys: </c>
+                        <table border="1">
+                            <tr>
+                                <th style="border: 2px solid darkgrey">Table</th>
+                                <th style="border: 2px solid darkgrey">Origin</th>
+                                <th style="border: 2px solid darkgrey">Destination</th>
+                            </tr>
+
+                            @foreach (@Models.Table.ForeignKey foreignKey in table.foreignKeys)
+                            {
+                                <tr>
+                                    <th style="border: 2px solid darkgrey">@foreignKey.tableName</th>
+                                    <th style="border: 2px solid darkgrey">@foreignKey.columnName</th>
+                                    <th style="border: 2px solid darkgrey">@foreignKey.referencedTableName</th>
+
+                                </tr>
+                            }
+                        </table>
+                    }
+                </div>
+
+            </div>
+        }       }
+</div>

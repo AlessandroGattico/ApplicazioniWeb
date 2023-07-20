@@ -1,0 +1,52 @@
+﻿@page
+@model GestoreDBMS.Pages.AddPostgreSqlModel
+@{
+    ViewData["Title"] = "Aggiungi PostgreSql";
+}
+
+<h1>Connettiti ad un Database PostgreSql</h1>
+
+<div class="row">
+    <h3>Inserisci i parametri per aprire la connessione con un database PosgreSql</h3>
+    <div>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="padding-bottom: 10px">
+                <label asp-for="postrgeSql.host" class="control-label">Indirizzo del database</label>
+                <input asp-for="postrgeSql.host" class="form-control" />
+                <span asp-validation-for="postrgeSql.host" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="postrgeSql.port" class="control-label">Porta del database</label>
+                <input asp-for="postrgeSql.port" class="form-control" />
+                <span asp-validation-for="postrgeSql.port" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="postrgeSql.name" class="control-label">Nome del database</label>
+                <input asp-for="postrgeSql.name" class="form-control" />
+                <span asp-validation-for="postrgeSql.name" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="postrgeSql.username" class="control-label">Username</label>
+                <input asp-for="postrgeSql.username" class="form-control" />
+                <span asp-validation-for="postrgeSql.username" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="postrgeSql.password" class="control-label">Password</label>
+                <input asp-for="postrgeSql.password" type="password" class="form-control" />
+                <span asp-validation-for="postrgeSql.password" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-top: 10px">
+                <input type="submit" value="Avvia" class="btn btn-primary" />
+                <a asp-page="../Index" class="btn btn-primary indietro">Indietro</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
